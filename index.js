@@ -2,16 +2,7 @@ const express = require("express");
 const cors = require('cors');
 const app = express();
 
-const allowedOrigins = ['https://notes-olive-eta.vercel.app'];
-app.use(cors({
-  origin: function (origin, callback) {
-    if (allowedOrigins.includes(origin) || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  }
-}));
+app.use(cors());
 
 let notes = [
   {
