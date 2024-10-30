@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-const cors = require('cors')
 
 let notes = [
   {
@@ -29,7 +28,6 @@ const requestLogger = (request, response, next) => {
 }
 
 app.use(express.json());
-app.use(cors())
 app.use(requestLogger);
 
 const unknownEndpoint = (request, response) => {
