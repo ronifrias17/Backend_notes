@@ -1,8 +1,10 @@
 const express = require("express");
 const cors = require('cors');
+const path = require('path');
 const app = express();
 
 app.use(cors());
+
 
 let notes = [
   {
@@ -37,8 +39,16 @@ const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
 }
 
-app.get("/", (request, response) => {
-  response.send("<h1>Hello World Roni!</h1>");
+// app.get("/", (request, response) => {
+//   response.send("<h1>Hello World Roni!</h1>");
+// });
+
+app.use(express.static(path.join(__dirname, 'dist')));
+
+
+// Cualquier ruta no definida en la API debe redirigir al archivo 'index.html'
+app.get('/', (request, response) => {
+  response.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 
 app.get("/api/notes", (request, response) => {
